@@ -15,7 +15,54 @@
   --line: rgba(250,250,247,0.14);
   --invert-bg: #FAFAF7;
   --invert-fg: #0A0A0A;
+  --accent1: #FF6B4A;
+  --accent2: #2FA8A0;
+  --accent3: #FFB238;
 }
+
+body[data-theme="light"]{
+  --bg: #FBF9F4;
+  --bg-2: #FFFFFF;
+  --fg: #16171B;
+  --muted: #4A4A55;
+  --line: rgba(20,20,30,0.16);
+  --invert-bg: #16171B;
+  --invert-fg: #FBF9F4;
+}
+
+body[data-theme="light"] .eyebrow{ color: var(--accent1); }
+body[data-theme="light"] .eyebrow::before{ background: var(--accent1); }
+body[data-theme="light"] .status{ border-color: var(--accent2); color: var(--accent2); }
+body[data-theme="light"] .venture:hover .status,
+body[data-theme="light"] .venture:focus-visible .status{ border-color: var(--bg); color: var(--bg); }
+body[data-theme="light"] .tag{ border-color: var(--accent1); color: var(--accent1); }
+body[data-theme="light"] .pill:hover{ background: var(--accent3); color:#16171B; border-color:var(--accent3); }
+body[data-theme="light"] .btn.solid{ background: var(--accent1); color:#fff; border-color:var(--accent1); }
+body[data-theme="light"] .btn.solid:hover{ background: transparent; color: var(--accent1); }
+body[data-theme="light"] .btn:not(.solid):hover{ background: var(--accent1); border-color:var(--accent1); color:#fff; }
+body[data-theme="light"] .tdot{ background: var(--accent2); }
+body[data-theme="light"] .navlinks a:hover, body[data-theme="light"] .navlinks a:focus-visible{ color: var(--accent1); }
+body[data-theme="light"] .navlinks a::after{ background: var(--accent1); }
+
+/* ---------- theme toggle ---------- */
+.theme-toggle{
+  width:38px; height:38px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:transparent;
+  color:var(--fg);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  transition:background .2s ease, color .2s ease, transform .15s ease;
+  margin-left:18px;
+}
+.theme-toggle:hover{ transform:translateY(-2px); }
+.theme-toggle svg{ width:18px; height:18px; }
+.theme-toggle .icon-sun{ display:none; }
+.theme-toggle .icon-moon{ display:block; }
+body[data-theme="light"] .theme-toggle .icon-sun{ display:block; color: var(--accent3); }
+body[data-theme="light"] .theme-toggle .icon-moon{ display:none; }
+
 
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -174,6 +221,7 @@ nav .wrap{ display:flex; align-items:center; justify-content:space-between; padd
 }
 @media(max-width:760px){ .about-grid{grid-template-columns:1fr;} }
 .about-grid p{ font-size:17px; color:#D9D9D3; max-width:56ch; }
+body[data-theme="light"] .about-grid p{ color:#1B1B22; }
 .facts{ display:grid; gap:0; border-top:1px solid var(--line); }
 .fact{
   display:flex; justify-content:space-between; gap:16px;
@@ -239,6 +287,7 @@ nav .wrap{ display:flex; align-items:center; justify-content:space-between; padd
 .trow h4{ font-family:'Fraunces',serif; font-weight:500; font-size:20px; margin-bottom:4px; }
 .trow .org{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); display:block; margin-bottom:8px; }
 .trow p{ margin:0; color:#C9C9C3; font-size:14.5px; max-width:60ch; }
+body[data-theme="light"] .trow p{ color:#22222A; }
 
 /* ---------- education ---------- */
 .edu-grid{ display:grid; gap:0; margin-top:40px; border-top:1px solid var(--line); }
@@ -304,6 +353,10 @@ a:focus-visible, button:focus-visible, .venture:focus-visible{ outline:2px solid
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </div>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -312,7 +365,7 @@ a:focus-visible, button:focus-visible, .venture:focus-visible{ outline:2px solid
     <div class="eyebrow">Dhaka, Bangladesh</div>
     <h1>Tauhid Noman<br><em>Songlap</em></h1>
     <div class="full-name">A K M TAUHID NOMAN SONGLAP</div>
-    <p class="tagline">Biotechnology researcher and project manager who builds things on the side. Currently studying phages that fight waterborne disease, and running a consumer product venture called Silly Socks.</p>
+    <p class="tagline">Biotechnology researcher and project manager who builds things on the side — currently studying phages that fight waterborne disease, and running a consumer product venture called Silly Socks.</p>
     <div class="hero-cta">
       <a class="btn solid" href="#ventures">See the work</a>
       <a class="btn" href="https://www.linkedin.com/in/tauhid-noman-songlap-60397820b/" target="_blank" rel="noopener">Get in touch</a>
@@ -611,6 +664,13 @@ a:focus-visible, button:focus-visible, .venture:focus-visible{ outline:2px solid
 </footer>
 
 <script>
+// theme toggle
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', ()=>{
+  const isLight = document.body.getAttribute('data-theme') === 'light';
+  document.body.setAttribute('data-theme', isLight ? 'dark' : 'light');
+});
+
 // custom cursor
 const cursor = document.getElementById('cursor');
 window.addEventListener('mousemove', (e)=>{
